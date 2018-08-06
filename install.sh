@@ -1,16 +1,16 @@
 
 # docker
 echo "$(tput setaf 6)$(tput bold)Installing Docker$(tput sgr0)"
-#sudo apt-get install -y docker.io
+sudo apt-get install -y docker.io
 docker --version
 # docker-machine
 echo "$(tput setaf 6)$(tput bold)Installing Docker machine$(tput sgr0)"
-#base=https://github.com/docker/machine/releases/download/v0.14.0 && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
-#sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+base=https://github.com/docker/machine/releases/download/v0.14.0 && curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+sudo install /tmp/docker-machine /usr/local/bin/docker-machine
 docker-machine --version
-# kubeadm, kubectl, kubeadm
-echo "$(tput setaf 6)$(tput bold)Installing kubeadm, kubectl and kubeadm$(tput sgr0)"
-#sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+# kubeadm, kubectl, kubelet
+echo "$(tput setaf 6)$(tput bold)Installing kubeadm, kubectl and kubelet$(tput sgr0)"
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 echo 'deb http://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update && sudo apt-get install -y kubelet kubeadm kubectl
 kubelet --version
