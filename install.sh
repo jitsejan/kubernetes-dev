@@ -1,4 +1,4 @@
-
+sudo apt-get update
 # docker
 echo "$(tput setaf 6)$(tput bold)Installing Docker$(tput sgr0)"
 sudo apt-get install -y docker.io
