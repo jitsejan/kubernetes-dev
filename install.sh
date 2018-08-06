@@ -38,6 +38,8 @@ echo "$(tput setaf 6)$(tput bold)Creating account for tiller$(tput sgr0)"
 sudo kubectl create -f ./rbac-config.yml
 echo "$(tput setaf 6)$(tput bold)Starting helm with tiller$(tput sgr0)"
 sudo helm init --service-account tiller
+echo "$(tput setaf 6)$(tput bold)Securing helm$(tput sgr0)"
+sudo kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
 sudo helm version
 # nginx ingress
 echo "$(tput setaf 6)$(tput bold)Installing Nginx ingress controller$(tput sgr0)"
