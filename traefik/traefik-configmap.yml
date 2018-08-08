@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-conf
+  namespace: kube-system
+data:
+  traefik.toml: |
+    # traefik.toml
+    defaultEntryPoints = ["http","https"]
+    [entryPoints]
+      [entryPoints.http]
+        address = ":80"
+      [entryPoints.http.redirect]
+        entryPoint = "https"
+      [entryPoints.https.auth.basic]
+        users = ["jitsejan:$apr1$M8Gmf.wA$nx8iZtLr4PZpnea5CCsdR1"]
+      [entryPoints.https]
+        address = ":443"
+      [entryPoints.https.tls]
+    [acme]
+      email = "mail@jitsejan.com"
+      storageFile = "/acme/acme.json"
+      entryPoint = "https"
+        [acme.httpChallenge]
+        entrypoint = "http"
+      onDemand = true
+      onHostRule = true
+      caServer = "https://acme-staging.api.letsencrypt.org/directory"
+    [[acme.domains]]
+      main = "hub.jitsejan.com"
