@@ -19,7 +19,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: hub.jitsejan.com
+  - host: traefik.jitsejan.com
     http:
       paths:
       - backend:

@@ -18,7 +18,7 @@ data:
         address = ":443"
       [entryPoints.https.tls]
     [acme]
-      email = "mail@jitsejan.com"
+      email = "jitsejan@gmail.com"
       storageFile = "/acme/acme.json"
       entryPoint = "https"
         [acme.httpChallenge]
@@ -27,4 +27,4 @@ data:
       onHostRule = true
       caServer = "https://acme-staging.api.letsencrypt.org/directory"
     [[acme.domains]]
-      main = "hub.jitsejan.com"
+      main = "jitsejan.com"
