@@ -12,8 +12,6 @@ data:
         address = ":80"
       [entryPoints.http.redirect]
         entryPoint = "https"
-      [entryPoints.https.auth.basic]
-        users = ["jitsejan:$apr1$M8Gmf.wA$nx8iZtLr4PZpnea5CCsdR1"]
       [entryPoints.https]
         address = ":443"
       [entryPoints.https.tls]

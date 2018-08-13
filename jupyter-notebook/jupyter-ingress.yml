@@ -19,6 +19,8 @@ metadata:
   namespace: jupyter-ns
   annotations:
     kubernetes.io/ingress.class: traefik
+    ingress.kubernetes.io/auth-remove-header: true
+    ingress.kubernetes.io/auth-type: forward
 spec:
   rules:
   - host: jupyter.jitsejan.com
