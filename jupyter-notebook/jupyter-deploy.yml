@@ -33,3 +33,11 @@ spec:
             port: 8558
           initialDelaySeconds: 30
           timeoutSeconds: 30
+        volumeMounts:
+        - mountPath : /home/jovyan/work/
+          name: jupyter-data
+      volumes:
+      - name: jupyter-data
+        persistentVolumeClaim:
+          claimName: jupyter-pvc
+    
