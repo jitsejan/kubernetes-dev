@@ -34,10 +34,9 @@ spec:
           initialDelaySeconds: 30
           timeoutSeconds: 30
         volumeMounts:
-        - mountPath : /home/jovyan/work/
+        - mountPath : /home/jovyan/
           name: jupyter-data
       volumes:
       - name: jupyter-data
         persistentVolumeClaim:
           claimName: jupyter-pvc
-    
