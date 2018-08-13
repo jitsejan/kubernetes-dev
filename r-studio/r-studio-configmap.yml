@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: r-studio-conf
+  namespace: r-studio-ns
+data:
+  r-user: jitsejan

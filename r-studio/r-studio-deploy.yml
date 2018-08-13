@@ -1,0 +1,52 @@
+---
+kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  labels:
+    k8s-app: r-studio
+  name: r-studio
+  namespace: r-studio-ns
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: r-studio
+  template:
+    metadata:
+      labels:
+        k8s-app: r-studio
+    spec:
+      containers:
+      - name: r-studio
+        image: rocker/verse
+        ports:
+        - containerPort: 8787
+          protocol: TCP
+          name: http
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /
+            port: 8787
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+        env:
+        - name: USER
+          valueFrom:
+            configMapKeyRef:
+              name: r-studio-conf
+              key: r-user
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: r-studio-secrets
+              key: password
+        volumeMounts:
+        - mountPath : /home/jitsejan/rstudiodata/
+          name: r-studio-data
+      volumes:
+      - name: r-studio-data
+        persistentVolumeClaim:
+          claimName: r-studio-pvc
+    

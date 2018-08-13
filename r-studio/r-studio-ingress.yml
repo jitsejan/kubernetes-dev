@@ -1,0 +1,29 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: r-studio
+  name: r-studio
+  namespace: r-studio-ns
+spec:
+  ports:
+    - port: 80
+      targetPort: 8787
+  selector:
+    k8s-app: r-studio
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: r-studio
+  namespace: r-studio-ns
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: r.jitsejan.com
+    http:
+      paths:
+      - backend:
+          serviceName: r-studio
+          servicePort: 80
