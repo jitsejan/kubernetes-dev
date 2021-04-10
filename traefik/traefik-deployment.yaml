@@ -5,7 +5,7 @@ metadata:
   name: traefik-ingress-controller
   namespace: kube-system
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: traefik-ingress-controller
@@ -14,6 +14,9 @@ metadata:
     k8s-app: traefik-ingress-lb
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: traefik-ingress-lb
   revisionHistoryLimit: 0
   template:
     metadata:
@@ -31,7 +34,7 @@ spec:
           hostPath:
             path: /srv/configs/acme.json
       containers:
-        - image: traefik
+        - image: traefik:v1.7
           name: traefik-ingress-lb
           volumeMounts:
             - mountPath: "/config"
@@ -66,5 +69,3 @@ spec:
       name: http
     - port: 443
       name: https
-  externalIPs:
-    - 142.44.184.35
